@@ -83,6 +83,8 @@ let createSlideItem = (slideName) => {
     currentSlideItem = event.currentTarget;
     selectInSlideList(currentSlideItem);
 
+    currentIndex = Object.keys(slides).indexOf(event.currentTarget.id);
+
     loadSlide(currentSlideItem.id);
   });
 
