@@ -274,6 +274,7 @@ textarea {
   background: #f4f4f4;
   overflow: scroll;
   scrollbar-width: none;
+  z-index: 1;
 }
 
 .slide-list::-webkit-scrollbar {
@@ -330,4 +331,9 @@ textarea {
   font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
   font-size: 20pt;
   color: #cccccc;
+}
+
+#menu-trigger {
+  z-index: 0;
+  display: none;
 }
