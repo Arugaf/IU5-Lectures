@@ -35,8 +35,47 @@ const slides = {
   'C++-Lec-01-02.30-cya': '<svg class="svg-adaptable" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" version="1.1" width="510px" height="300px" viewBox="-0.5 -0.5 510 300" content="&lt;mxfile host=&quot;Electron&quot; modified=&quot;2023-09-09T21:08:00.834Z&quot; agent=&quot;Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.6.8 Chrome/114.0.5735.289 Electron/25.5.0 Safari/537.36&quot; etag=&quot;ufHAt9nmRKQTi3vyMCZi&quot; version=&quot;21.6.8&quot; type=&quot;device&quot;&gt;&lt;diagram name=&quot;Page-1&quot; id=&quot;L0PIO8V_4aDFIqeGwyQa&quot;&gt;vVhLj5swEP41kdrDRmCeOYY8tqpa7SGt2h5pcAgtxCxxNtn++tr4wRjDlpVWvRDzeTwvf2MzmXmr6nbfpPXxM8lwOUNOdpt56xlCru/57IcjzwKJfU8AeVNkUqgDdsUfLEFHopciw2dDkBJS0qI2wT05nfCeGljaNORqih1IaVqt0xxbwG6fljb6rcjoUUaBog7/gIv8qCy74ULMVKkSlpGcj2lGrgDyNjNv1RBCxai6rXDJk6fyItZtR2a1Yw0+0SkLLuGPb1/u45x8TfDDLiBPmzC/k5vxlJYXGfAMhSXTl2TFE3eaPstMhI8X7mlijHL52644EOYIS3G6N1esSHUgDU3T8aXnOj0NWuM6784tK5ZMwA3r25gPaVWzQavOU3pZNoRq0xyDhbMW3EatUGS4hCi+cfxIq5IBLnebNuQ3XpGSNAw5kRPmLhdl2YPSsshP7LXEB67hCTe0YBRbSrgqsowbSa7HguJdLRJ4ZQXFsIZcThnme+hop+CmSx5wnfgGIEmCe0wqTJtnJiJnfcnHZ/P12rHbjyR2BMxWcqksqFwr7jjHBpJ2wxTcouih/vTrgTpf8zsHfw/Pjx/vXJuCLNSFO2Mpjj0+Tnw5ZgznAzHViiUCccAYtc8VkNy2C5nApn0KcCmnpBjD1wBRSpBj2mJPxkONR2AWKk+URfXKx4kUk1NroHMFEKHHM4VdMCX0BPIpBbZAoBcI0NwTNvLpAH/gqgCM41YSLOwUag0B2LLE2D7+XCg9OupYKYFxid0JgdEtXDJXJfuz6RcxQDiNENjgoB0HwF4bTJdfhcgNFgkV2wwToZnBXkOLoGBrpwamvFIhwAgMF/Q+6gNLy05PydKiigtYAd1EYLOW5maNlad41XqSgcJEDlA4lMWOYz0S9jRLsXcWpzWDRZARoM4G2NP11jtT4vdzqWbZK/yhqu/5KV8jsHALdhseCFD5AugMJhBHVoHwErJXpC8eU63WLKCDvlX6LzgFMwvrHuYx0WZg7DEYW0qNkzawwhdheZNZvoyspPc2rHcIri3G95g6vWAcc3mvVPRBhMD563TXg83PfuKhAzr9MVgCj9de7Y1daXZNLocyM0h3NuuDGNcWp1YgUWvLeqIubD2bSPa9dLtAtTqZgyHYqdACa9MNnboIJMo38G6sDCGVf5XYuXB6+oGs724r2dJ3eLoG4BrV6Yd3dyQ+lYHOF66vF67HN7zZxkoBftTBEHyT8vFA6fz7KnF6n1LTjw5vxLYuK/PL0rq1zX5oL3sB2LR4h0MURPg1fcxIwwKs/q92hZJ6Uq/CPd6mVVHyTqNrAsXEjlyadumRUtbKo4CTNmCNBH9wgfM8JyQvcVoX5/meVO3E/tyKbg9CLRsait++O4rt7ihwB7ojFL6+PWKvXfffzoH/ULzNXw==&lt;/diagram&gt;&lt;/mxfile&gt;"><defs><style type="text/css">@import url(https://fonts.googleapis.com/css?family=Comfortaa);&#xa;</style></defs><g><rect x="0" y="0" width="470" height="40" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe center; justify-content: unsafe flex-start; width: 468px; height: 1px; padding-top: 20px; margin-left: 2px;"><div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: left;"><div style="display: inline-block; font-size: 12px; font-family: Helvetica; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;"><div style=""><font face="Comfortaa"><span style="font-size: 16px;">&lt;3</span></font></div></div></div></div></foreignObject><text x="2" y="24" fill="rgb(0, 0, 0)" font-family="Helvetica" font-size="12px">&lt;3</text></switch></g><rect x="0" y="40" width="510" height="260" fill="none" stroke="none" pointer-events="all"/><g transform="translate(-0.5 -0.5)"><switch><foreignObject pointer-events="none" width="100%" height="100%" requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility" style="overflow: visible; text-align: left;"><div xmlns="http://www.w3.org/1999/xhtml" style="display: flex; align-items: unsafe flex-start; justify-content: unsafe flex-start; width: 508px; height: 1px; padding-top: 47px; margin-left: 2px;"><div data-drawio-colors="color: rgb(0, 0, 0); " style="box-sizing: border-box; font-size: 0px; text-align: left;"><div style="display: inline-block; font-size: 12px; font-family: Comfortaa; color: rgb(0, 0, 0); line-height: 1.2; pointer-events: all; white-space: normal; overflow-wrap: normal;">Буду стараться объяснять так, чтобы было намного более понятно по сравнению с предыдущими лекциями.<br /><br />Всех люблю, очень жду на лекциях <b>очно</b>.<br /><br />Конспектики буду делать каждую неделю (по возможности). Так что не записывайте лекции. Слушайте. Задавайте вопросы. Пишите в телегу.<br /><br />Чисто по этим конспектам будет сложно воспринимать, так как это не фундаментальный предмет как матанализ, физика и т.п.<br /><br />Поэтому еще раз: очень всех жду на лекциях, буду рад видеть каждого.<br /><br />Увидимся <b><font color="#ff757e">&lt;3</font></b></div></div></div></foreignObject><text x="2" y="59" fill="rgb(0, 0, 0)" font-family="Comfortaa" font-size="12px">Буду стараться объяснять так, чтобы было намного более понятно по сравнению с предыдущими лекциями....</text></switch></g></g><switch><g requiredFeatures="http://www.w3.org/TR/SVG11/feature#Extensibility"/><a transform="translate(0,-5)" xlink:href="https://www.drawio.com/doc/faq/svg-export-text-problems" target="_blank"><text text-anchor="middle" font-size="10px" x="50%" y="100%">Text is not SVG - cannot display</text></a></switch></svg>',
 }
 
-import { subscribeSwipe } from './swipe';
 
+/**
+ * SWIPES
+ */
+const THRESHOLD = 100;
+
+function getActionType(event, startX, endX) {
+  const menuTriggerArea = document.getElementById('menu-trigger');
+
+  if (endX + THRESHOLD < startX && event.target !== menuTriggerArea) {
+    return 'next';
+  }
+  if (endX > startX + THRESHOLD) {
+    if (menuTriggerArea && event.target === menuTriggerArea) {
+      return 'menu';
+    } else {
+      return 'prev';
+    }
+  }
+}
+
+function subscribeSwipe(fn) {
+    let touchstartX = 0;
+    let touchendX = 0;
+
+    document.addEventListener('touchstart', e => {
+      touchstartX = e.changedTouches[0].screenX
+    });
+      
+    document.addEventListener('touchend', e => {
+      touchendX = e.changedTouches[0].screenX
+      const actionType = getActionType(e, touchstartX, touchendX);
+
+      fn(actionType);
+    });
+} 
+
+
+/**
+ * MAIN
+ */
 const selectedColor = '#42f6db';
 
 let currentSlideName = Object.keys(slides)[0];
@@ -107,7 +146,7 @@ let selectInSlideList = (slideItem, select = true) => {
 }
 
 function updateSlide(index) {
-  if (index >= Object.keys(slides).length - 1 || index <= -1) {
+  if (index >= Object.keys(slides).length || index <= -1) {
     return;
   }
 
