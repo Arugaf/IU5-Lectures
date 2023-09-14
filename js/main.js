@@ -41,36 +41,27 @@ const slides = {
  */
 const THRESHOLD = 100;
 
-function getActionType(event, startX, endX) {
+function startListeningGestures(events) {
   const menuTriggerArea = document.getElementById('menu-trigger');
+  const menuManager = new Hammer.Manager(menuTriggerArea, {
+    recognizers: [
+      [Hammer.Swipe, { direction: Hammer.DIRECTION_RIGHT }],
+    ]
+  });
+  menuManager.on('swipe', () => {
+    events.menuOpen?.();
+  });
 
-  if (endX + THRESHOLD < startX && event.target !== menuTriggerArea) {
-    return 'next';
-  }
-  if (endX > startX + THRESHOLD) {
-    if (menuTriggerArea && event.target === menuTriggerArea) {
-      return 'menu';
-    } else {
-      return 'prev';
-    }
-  }
+  const contentArea = document.querySelector('.main-view');
+  const paginationManager = new Hammer.Manager(contentArea, {
+    recognizers: [
+      [Hammer.Swipe, { direction: Hammer.DIRECTION_HORIZONTAL }],
+    ]
+  });
+  paginationManager.on('swipe', (event) => {
+    events.contentSwap?.(event.direction);
+  });
 }
-
-function subscribeSwipe(fn) {
-    let touchstartX = 0;
-    let touchendX = 0;
-
-    document.addEventListener('touchstart', e => {
-      touchstartX = e.changedTouches[0].screenX
-    });
-      
-    document.addEventListener('touchend', e => {
-      touchendX = e.changedTouches[0].screenX
-      const actionType = getActionType(e, touchstartX, touchendX);
-
-      fn(actionType);
-    });
-} 
 
 
 /**
@@ -179,24 +170,20 @@ window.onload = () => {
     }
   });
 
-  subscribeSwipe(action => {
-    const menu = document.querySelector('.slide-list');
-
-    switch (action) {
-      case 'prev': 
-        updateSlide(currentIndex - 1);
-        break;
-      
-      case 'next':
-        updateSlide(currentIndex + 1);
-        break;
-
-      case 'menu':
-        menu.classList.add('opened');
-        break;
-
-      default: 
-        break;
-    }
+  startListeningGestures({
+    menuOpen: () => {
+      const menu = document.querySelector('.slide-list');
+      menu.classList.add('opened');
+    },
+    contentSwap: (direction) => {
+      switch (direction) {
+        case Hammer.DIRECTION_RIGHT: 
+          updateSlide(currentIndex + 1);
+          break;
+        case Hammer.DIRECTION_LEFT: 
+          updateSlide(currentIndex - 1);
+          break;
+      }
+    },
   });
 }

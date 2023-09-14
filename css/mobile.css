@@ -28,10 +28,19 @@
 
     #menu-trigger {
         position: absolute;
-        top: 0;
-        bottom: 0;
-        left: 0;
+        top: calc(50% - 40px);
+        left: -40px;
         width: 80px;
-        display: block;
+        height: 80px;
+        border-radius: 50%;
+        background-color: rgba(204, 204, 204, 0.3);
+        display: flex;
+    }
+
+    #menu-trigger svg {
+        width: 30px;
+        height: 30px;
+        margin: auto 0 auto 40px;
+        opacity: 0.5;
     }
 }

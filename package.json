@@ -12,5 +12,8 @@
   },
   "devDependencies": {
     "parcel-bundler": "^1.12.4"
+  },
+  "dependencies": {
+    "hammerjs": "^2.0.8"
   }
 }
