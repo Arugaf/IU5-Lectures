@@ -304,6 +304,13 @@ textarea {
   font-size: 12pt;
 }
 
+.slide-element-title {
+  font-size: 16pt;
+  font-weight: 600;
+  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
+  padding: 8px;
+}
+
 .main-view {
   width: 75vw;
   height: 75vh;
