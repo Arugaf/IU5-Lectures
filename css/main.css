@@ -361,6 +361,10 @@ textarea {
 }
 
 .search-container {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: 8px;
   padding: 16px;
 }
 
@@ -380,4 +384,17 @@ textarea {
 .search:focus {
   outline: none;
   border: 2px solid #1a73e8;
+}
+
+.clear-icon {
+  cursor: pointer;
+  box-sizing: border-box;
+  min-width: 40px;
+  height: 40px;
+  background-color: rgb(95, 95, 95, 0.15);
+  border-radius: 50%;
+  background-size: 60%;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-image: url("data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAADAAAAAwCAYAAABXAvmHAAAACXBIWXMAAAsTAAALEwEAmpwYAAABlUlEQVR4nO2YPS8EQRjHf8RLznlrFArR8R3wZahoTqM6Or4AF9+ASBQkOo1KQkfipVBozlcQEtYjm8wlsrmXuZ1nbizzS55uNvv/7c7szjwQiUQikYg788Ae8Ai8AuJYn8ALcAQs4ZF+YAf4UAgtbWofGNAOPwgcew4uGQk1hoDTHoYXUyrTaQQ4DxBegEPX8KPARaDwYhZ2biaAy4DhxXydcjEJXAcOL6a6Zgq47eIGVaAMrAOJxfgEqJhrtrQFpoGHLp9Quk4arHSQSMyYBuOaAjPAU45XnD5NLCSy4TFvTUVgFnjOOUebBctK2IyRvAIl4N5xobUL6BJebAQ2HMN3knAJLzYCN0oCrSRcwkun8H3Au6JAWl/AmlJ4sRF48yCw2uReyz4ECj+F/sQiLgF3Rf6MFv5HFnIrUdEUyLuZK1uEbyUxpi3Q6+30pg+BxoHmynFha9X/PFL+lkN9HQWGgbNAAgcoNrZOAggsUuDWYg1Pzd3tHjR3az6auz+ZA3bNT0+rvV43rcQFn8EjkUgkQqH5BraMt8ZJuvWjAAAAAElFTkSuQmCC");
 }

@@ -333,8 +333,14 @@ let createSlideElements = () => {
 
   searchContainer.classList.add('search-container');
   searchInput.classList.add('search');
-
   searchContainer.appendChild(searchInput);
+
+  const clearIcon = document.createElement('div');
+  clearIcon.classList.add('clear-icon');
+  clearIcon.addEventListener('click', () => {
+    searchInput.value = '';
+  });
+  searchContainer.appendChild(clearIcon);
 
   slideList.appendChild(searchContainer);
 
