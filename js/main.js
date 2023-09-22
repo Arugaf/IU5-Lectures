@@ -326,6 +326,19 @@ let unloadCurrentSlide = () => {
 let createSlideElements = () => {
   const slideList = document.getElementsByClassName('slide-list').item(0);
 
+  // create input search
+  const searchContainer = document.createElement('div');
+  const searchInput = document.createElement('input');
+  searchInput.setAttribute('type', 'text');
+
+  searchContainer.classList.add('search-container');
+  searchInput.classList.add('search');
+
+  searchContainer.appendChild(searchInput);
+
+  slideList.appendChild(searchContainer);
+
+  // create slides list
   Object.entries(slides).forEach(([lecture, slides]) => {
     slideList.appendChild(createSlideTitle(lecture));
 

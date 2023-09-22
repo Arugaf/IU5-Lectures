@@ -359,3 +359,25 @@ textarea {
   z-index: 0;
   display: none;
 }
+
+.search-container {
+  padding: 16px;
+}
+
+.search {
+  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
+  font-size: 12pt;
+  width: 100%;
+  border: 1px solid rgb(95, 95, 95, 0.3);
+  background-color: #fff;
+  border-radius: 16px;
+  box-sizing: border-box;
+  height: 40px;
+  padding: 16px;
+  transition: 150ms;
+}
+
+.search:focus {
+  outline: none;
+  border: 2px solid #1a73e8;
+}
