@@ -42,6 +42,46 @@ const slides = {
   },
 }
 
+const LECTURE_TAGS = {
+  'Lecture 1': {
+    'C++-Lec-01-02.01-CPP': ['example', 'tag', 'lecture'],
+    'C++Lec-01-02.02-interlude-cpp': ['pain'],
+    'C++-Lec-01-02.03-paradigms': ['example'],
+    'C++-Lec-01-02.04-OOP': ['tag', 'pain'],
+    'C++-Lec-01-02.05-procedural': [],
+    'C++-Lec-01-02.06-remaining-paradigms': [],
+    'C++-Lec-01-02.07-python': [],
+    'C++-Lec-01-02.08-typing': [],
+    'C++-Lec-01-02.09-init-and-typecasting': [],
+    'C++-Lec-01-02.10-typing-static-and-dynamic': [],
+    'C++-Lec-01-02.11-typing-weak-strong': [],
+    'C++-Lec-01-02.12-typing-manifest-inferred': [],
+    'C++-Lec-01-02.13-interlude-why-so-hard': [],
+    'C++-Lec-01-02.14-hello-world-00-include': [],
+    'C++-Lec-01-02.15-hello-world-01-include-iostream': [],
+    'C++-Lec-01-02.16-hello-world-02-iostream': [],
+    'C++-Lec-01-02.17-hello-world-03-cout-cin': [],
+    'C++-Lec-01-02.18-hello-world-04-main': [],
+    'C++-Lec-01-02.19-hello-world-05-argc-argv': [],
+    'C++-Lec-01-02.20-hello-world-06-operator-overload': [],
+    'C++-Lec-01-02.21-hello-world-07-buffer': [],
+    'C++-Lec-01-02.22-interlude-why-now': [],
+    'C++-Lec-01-02.23-hello-world-08-scope-01': [],
+    'C++-Lec-01-02.24-hello-world-09-scope-02': [],
+    'C++-Lec-01-02.25-hello-world-10-namespaces': [],
+    'C++-Lec-01-02.26-hello-world-11-using-namespace-std': [],
+    'C++-Lec-01-02.27-hello-world-12-final-01': [],
+    'C++-Lec-01-02.28-hello-world-13-final-02': [],
+    'C++-Lec-01-02.29-results-next-lec': [],
+    'C++-Lec-01-02.30-cya': [],
+  },
+  'Lecture 2': {
+    'C++-Lec-01-02.01-CPP-copy': [],
+    'C++Lec-01-02.02-interlude-cpp-copy': [],
+    'C++-Lec-01-02.03-paradigms-copy': [],
+  },
+}
+
 
 /**
  * SWIPES
@@ -305,6 +345,8 @@ let currentSlideItem;
 
 let currentIndex = 0;
 
+let currentTags = [];
+
 let loadSlide = (slideName) => {
   const newSlide = document.createElement('div');
   newSlide.innerHTML = currentSlides[slideName];
@@ -320,7 +362,10 @@ let loadSlide = (slideName) => {
 }
 
 let unloadCurrentSlide = () => {
-  document.getElementsByClassName('main-view').item(0).getElementsByTagName('svg').item(0).remove();
+  const slide = document.getElementsByClassName('main-view').item(0).getElementsByTagName('svg');
+  if (slide && slide.item(0)) {
+    slide.item(0).remove();
+  }
 }
 
 let createSlideElements = () => {
@@ -373,6 +418,8 @@ const createSlideTitle = (title) => {
     if (!target) {
       console.error('Cannot find container to toggle');
     }
+    
+    document.getElementById(currentLecture).classList.remove('open');
 
     document.getElementById(currentLecture).nextSibling.classList.remove('slides-open');
   
@@ -383,6 +430,8 @@ const createSlideTitle = (title) => {
     currentSlides = slides[currentLecture];
     currentSlideName = Object.keys(currentSlides)[0];
     currentIndex = 0;
+
+    document.getElementById(currentLecture).classList.add('open');
 
     loadSlide(currentSlideName);
     currentSlideItem = document.getElementById(Object.keys(currentSlides)[currentIndex]);
@@ -426,6 +475,9 @@ let createSlideItem = (slideName) => {
 }
 
 let selectInSlideList = (slideItem, select = true) => {
+  if (!slideItem) {
+    return;
+  }
   if (select) {
     slideItem.style.background = selectedColor;
   } else {
@@ -454,12 +506,6 @@ function updateSlide(index) {
 
 window.onload = () => {
   createSlideElements();
-
-  document.getElementById(currentLecture).nextSibling.classList.add('slides-open');
-
-  loadSlide(currentSlideName);
-  currentSlideItem = document.getElementById(Object.keys(currentSlides)[currentIndex]);
-  selectInSlideList(currentSlideItem);
 
   document.addEventListener('keydown', (event) => {
       if (event.isComposing || event.key === 'ArrowDown' || event.key === 'ArrowRight') {
