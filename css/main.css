@@ -331,24 +331,27 @@ textarea {
   max-height: fit-content;
 }
 
+.scrolling {
+  width: 100%;
+  overflow-y: scroll;
+}
+
 .main-view {
+  position: relative;
   width: 75vw;
-  height: 75vh;
+  height: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
   margin-left: 2rem;
+  margin-right: 40px;
 }
 
 .svg-adaptable {
   width: 100%;
-  max-width: 150%;
-  min-width: 0;
-  height: 100%;
-  max-height: 150%;
-  min-height: 0;
-  margin: 0 auto;
-  display: inline-block;
+  height: fit-content;
+  margin: auto;
 }
 
 .pagination {
@@ -402,4 +405,21 @@ textarea {
   opacity: 0.3;
   position: absolute;
   background-image: url("data:image/svg+xml;base64,PD94bWwgdmVyc2lvbj0iMS4wIiA/PjwhRE9DVFlQRSBzdmcgIFBVQkxJQyAnLS8vVzNDLy9EVEQgU1ZHIDEuMS8vRU4nICAnaHR0cDovL3d3dy53My5vcmcvR3JhcGhpY3MvU1ZHLzEuMS9EVEQvc3ZnMTEuZHRkJz48c3ZnIGVuYWJsZS1iYWNrZ3JvdW5kPSJuZXcgMCAwIDUxMiA1MTIiIGhlaWdodD0iNTEycHgiIGlkPSJMYXllcl8xIiB2ZXJzaW9uPSIxLjEiIHZpZXdCb3g9IjAgMCA1MTIgNTEyIiB3aWR0aD0iNTEycHgiIHhtbDpzcGFjZT0icHJlc2VydmUiIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgeG1sbnM6eGxpbms9Imh0dHA6Ly93d3cudzMub3JnLzE5OTkveGxpbmsiPjxwYXRoIGQ9Ik00OTcuOTEzLDQ5Ny45MTNjLTE4Ljc4MiwxOC43ODItNDkuMjI1LDE4Ljc4Mi02OC4wMDgsMGwtODQuODYyLTg0Ljg2M2MtMzQuODg5LDIyLjM4Mi03Ni4xMywzNS43MTctMTIwLjY1OSwzNS43MTcgIEMxMDAuNDY5LDQ0OC43NjcsMCwzNDguMzEyLDAsMjI0LjM4M1MxMDAuNDY5LDAsMjI0LjM4NCwwYzEyMy45MzEsMCwyMjQuMzg0LDEwMC40NTIsMjI0LjM4NCwyMjQuMzgzICBjMCw0NC41MTQtMTMuMzUyLDg1Ljc3MS0zNS43MTgsMTIwLjY3Nmw4NC44NjMsODQuODYzQzUxNi42OTUsNDQ4LjcwNCw1MTYuNjk1LDQ3OS4xMzEsNDk3LjkxMyw0OTcuOTEzeiBNMjI0LjM4NCw2NC4xMDkgIGMtODguNTExLDAtMTYwLjI3NCw3MS43NDctMTYwLjI3NCwxNjAuMjczYzAsODguNTI2LDcxLjc2NCwxNjAuMjc0LDE2MC4yNzQsMTYwLjI3NGM4OC41MjUsMCwxNjAuMjczLTcxLjc0OCwxNjAuMjczLTE2MC4yNzQgIEMzODQuNjU3LDEzNS44NTYsMzEyLjkwOSw2NC4xMDksMjI0LjM4NCw2NC4xMDl6Ii8+PC9zdmc+");
+}
+
+.tags {
+  display: flex;
+  flex-direction: row;
+  gap: 8px;
+  padding: 40px 0 16px 0;
+  width: 100%;
+}
+
+.tag {
+  opacity: 0.5;
+  padding: 2px 10px;
+  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
+  font-size: 10pt;
+  background-color: rgb(95, 95, 95, 0.1);
+  border-radius: 8px;
 }

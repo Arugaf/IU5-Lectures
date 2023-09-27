@@ -23,7 +23,7 @@
     .svg-adaptable {
         height: auto;
         width: 100%;
-        margin: 50px;
+        margin: 50px 20px 0 50px;
     }
 
     #menu-trigger {
@@ -41,5 +41,14 @@
         height: 30px;
         margin: auto 0 auto 40px;
         opacity: 0.5;
+    }
+
+    .tags {
+        margin: 0 50px;
+    }
+
+    .scrolling {
+        display: flex;
+        flex-wrap: wrap;
     }
 }

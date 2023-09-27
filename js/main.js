@@ -68,7 +68,7 @@ const LECTURE_TAGS = {
     'C++-Lec-01-02.22-interlude-why-now': [],
     'C++-Lec-01-02.23-hello-world-08-scope-01': [],
     'C++-Lec-01-02.24-hello-world-09-scope-02': [],
-    'C++-Lec-01-02.25-hello-world-10-namespaces': [],
+    'C++-Lec-01-02.25-hello-world-10-namespaces': ['example', 'tag', 'lecture'],
     'C++-Lec-01-02.26-hello-world-11-using-namespace-std': [],
     'C++-Lec-01-02.27-hello-world-12-final-01': [],
     'C++-Lec-01-02.28-hello-world-13-final-02': [],
@@ -350,10 +350,26 @@ let currentTags = [];
 let loadSlide = (slideName) => {
   const newSlide = document.createElement('div');
   newSlide.innerHTML = currentSlides[slideName];
-  document.getElementsByClassName('main-view').item(0).appendChild(newSlide.childNodes[0]);
+  document.getElementsByClassName('scrolling').item(0).appendChild(newSlide.childNodes[0]);
+
   currentSlideName = slideName;
 
   document.getElementsByClassName('pagination').item(0).innerText = currentIndex + 1;
+
+  const tagsContainer = document.createElement('div');
+  tagsContainer.classList.add('tags');
+
+  console.log(LECTURE_TAGS[currentLecture][currentSlideName])
+
+  currentTags = LECTURE_TAGS[currentLecture][currentSlideName] || [];
+  currentTags.forEach((keyword) => {
+    const tag = document.createElement('div');
+    tag.innerText = keyword;
+    tag.classList.add('tag');
+    tagsContainer.appendChild(tag);
+  });
+
+  document.getElementsByClassName('scrolling').item(0).appendChild(tagsContainer);
 
   const menu = document.querySelector('.slide-list');
   if (menu.classList.contains('opened')) {
@@ -362,9 +378,11 @@ let loadSlide = (slideName) => {
 }
 
 let unloadCurrentSlide = () => {
-  const slide = document.getElementsByClassName('main-view').item(0).getElementsByTagName('svg');
-  if (slide && slide.item(0)) {
-    slide.item(0).remove();
+  const slide = document.getElementsByClassName('scrolling').item(0);
+  if (slide) {
+    while (slide.firstChild) {
+      slide.removeChild(slide.firstChild);
+    }
   }
 }
 
@@ -505,6 +523,10 @@ function updateSlide(index) {
 }
 
 window.onload = () => {
+  const scrollingContainer = document.createElement('div');
+  scrollingContainer.classList.add('scrolling');
+  document.getElementsByClassName('main-view').item(0).appendChild(scrollingContainer);
+
   createSlideElements();
 
   document.addEventListener('keydown', (event) => {
