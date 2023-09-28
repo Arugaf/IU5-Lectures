@@ -51,4 +51,11 @@
         display: flex;
         flex-wrap: wrap;
     }
+
+    .dropdown {
+        height: calc(100% - 61px);
+        left: 0;
+        width: 100%;
+        max-height: none;
+    }
 }
