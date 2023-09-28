@@ -396,14 +396,99 @@ let createSlideElements = () => {
 
   searchContainer.classList.add('search-container');
   searchInput.classList.add('search');
+  searchInput.addEventListener('input', (event) => {
+    const { value } = event.target;
+
+    const dropdown = document.getElementsByClassName('dropdown').item(0);
+
+    if (!dropdown) {
+      console.error('No search dropdown');
+      return;
+    }
+
+    dropdown.innerHTML = "";
+
+    if (!value) {
+      dropdown.classList.add('close');
+      return;
+    }
+
+    const results = searchInTags(value);
+
+    console.log(results);
+
+    const mappedResults = Object.entries(results).map(([lecture, slides]) => Object.entries(slides).map(([slide, tags]) => [`${lecture}: ${slide}`, tags])).flat();
+
+    console.log(mappedResults);
+
+    if (!mappedResults.length) {
+      const item = document.createElement('div');
+      item.classList.add('dropdown-item');
+      item.classList.add('not-found-item');
+      item.innerText = 'Ничего не найдено';
+      dropdown.appendChild(item);
+    } else {
+      mappedResults.forEach(([found, tags]) => {
+        const item = document.createElement('div');
+        item.classList.add('dropdown-item');
+
+        const title = document.createElement('div');
+        title.innerText = found;
+
+        const tagsContainer = document.createElement('div');
+        tagsContainer.classList.add('search-tags-container');
+        tags.forEach((tagTitle) => {
+          const tag = document.createElement('div');
+          tag.innerHTML = tagTitle;
+          tag.classList.add('search-tag');
+          tagsContainer.appendChild(tag);
+        });
+
+        item.appendChild(title);
+        item.appendChild(tagsContainer);
+
+        item.addEventListener('click', (event) => {
+          if (currentLecture) {
+            document.getElementById(currentLecture).classList.remove('open');
+
+            document.getElementById(currentLecture).nextSibling.classList.remove('slides-open');
+            
+            unloadCurrentSlide();
+            selectInSlideList(currentSlideItem, false);
+          }
+
+          const split = found.split(':');
+
+          currentLecture = split[0].trim();
+          currentSlides = slides[currentLecture];
+          currentSlideName = split[1].trim();
+          currentIndex = Object.keys(currentSlides).indexOf(currentSlideName);
+
+          document.getElementById(currentLecture).classList.add('open');
+
+          loadSlide(currentSlideName);
+          currentSlideItem = document.getElementById(Object.keys(currentSlides)[currentIndex]);
+          selectInSlideList(currentSlideItem);
+          
+          document.getElementById(currentLecture).nextSibling.classList.add('slides-open');
+
+          dropdown.classList.add('close');
+          searchInput.value = "";
+        });
+
+        dropdown.appendChild(item);
+      });
+    }   
+
+    if (dropdown.classList.contains('close') && value) {
+      dropdown.classList.remove('close');
+    }
+  });
   searchContainer.appendChild(searchInput);
 
-  const clearIcon = document.createElement('div');
-  clearIcon.classList.add('clear-icon');
-  clearIcon.addEventListener('click', () => {
-    searchInput.value = '';
-  });
-  searchContainer.appendChild(clearIcon);
+  const searchIcon = document.createElement('div');
+  searchIcon.classList.add('clear-icon');
+  searchContainer.appendChild(searchIcon);
 
   slideList.appendChild(searchContainer);
 
@@ -522,12 +607,47 @@ function updateSlide(index) {
   currentSlideItem.scrollIntoView(false);
 }
 
+function searchInTags(filter) {
+  const searchResults = {};
+
+  Object.entries(LECTURE_TAGS).forEach(([lecture, slideTags]) => {
+    Object.entries(slideTags).forEach(([slideName, tags]) => {
+      if (tags.some(slideTag => slideTag.toLowerCase().includes(filter.toLowerCase()))) {
+        if (!searchResults[lecture]) {
+          searchResults[lecture] = {};
+        }
+        searchResults[lecture][slideName] = tags.map((tag) => {
+          const lowerFilter = filter.toLowerCase();
+          const lowerTag = tag.toLowerCase();
+
+          if (lowerTag.includes(lowerFilter)) {
+            return lowerTag.replace(lowerFilter, `<span>${lowerFilter}</span>`);
+          } else {
+            return lowerTag;
+          }
+        });
+      }
+    });
+  });
+
+  return searchResults;
+}
+
+function createDropdown() {
+  const container = document.createElement('div');
+  container.classList.add('dropdown');
+  container.classList.add('close');
+
+  document.body.appendChild(container);
+}
+
 window.onload = () => {
   const scrollingContainer = document.createElement('div');
   scrollingContainer.classList.add('scrolling');
   document.getElementsByClassName('main-view').item(0).appendChild(scrollingContainer);
 
   createSlideElements();
+  createDropdown();
 
   document.addEventListener('keydown', (event) => {
       if (event.isComposing || event.key === 'ArrowDown' || event.key === 'ArrowRight') {
