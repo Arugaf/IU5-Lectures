@@ -283,7 +283,7 @@ textarea {
 
 .slide-container {
   display: flex;
-  width: 100%;
+  padding: 0 8px;
 }
 
 .slide-container:hover {
@@ -374,7 +374,7 @@ textarea {
   flex-direction: row;
   align-items: center;
   gap: 8px;
-  padding: 16px;
+  padding: 16px 8px;
 }
 
 .search {
