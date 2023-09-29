@@ -347,6 +347,8 @@ let currentIndex = 0;
 
 let currentTags = [];
 
+let oldPath = document.location.href;
+
 let loadSlide = (slideName) => {
   const newSlide = document.createElement('div');
   newSlide.innerHTML = currentSlides[slideName];
@@ -358,8 +360,6 @@ let loadSlide = (slideName) => {
 
   const tagsContainer = document.createElement('div');
   tagsContainer.classList.add('tags');
-
-  console.log(LECTURE_TAGS[currentLecture][currentSlideName])
 
   currentTags = LECTURE_TAGS[currentLecture][currentSlideName] || [];
   currentTags.forEach((keyword) => {
@@ -415,11 +415,7 @@ let createSlideElements = () => {
 
     const results = searchInTags(value);
 
-    console.log(results);
-
     const mappedResults = Object.entries(results).map(([lecture, slides]) => Object.entries(slides).map(([slide, tags]) => [`${lecture}: ${slide}`, tags])).flat();
-
-    console.log(mappedResults);
 
     if (!mappedResults.length) {
       const item = document.createElement('div');
@@ -474,6 +470,8 @@ let createSlideElements = () => {
 
           dropdown.classList.add('close');
           searchInput.value = "";
+
+          history.pushState(null, null, currentSlideName);
         });
 
         dropdown.appendChild(item);
@@ -541,6 +539,8 @@ const createSlideTitle = (title) => {
     selectInSlideList(currentSlideItem);
 
     target.classList.add('slides-open');
+
+    history.pushState(null, null, currentSlideName);
   });
 
   return container;
@@ -572,6 +572,8 @@ let createSlideItem = (slideName) => {
     currentIndex = Object.keys(currentSlides).indexOf(event.currentTarget.id);
 
     loadSlide(currentSlideItem.id);
+
+    history.pushState(null, null, currentSlideItem.id);
   });
 
   return slideContainer;
@@ -605,6 +607,8 @@ function updateSlide(index) {
   currentSlideItem = document.getElementById(newSlideName);
   selectInSlideList(currentSlideItem);
   currentSlideItem.scrollIntoView(false);
+
+  history.pushState(null, null, newSlideName);
 }
 
 function searchInTags(filter) {
@@ -641,7 +645,48 @@ function createDropdown() {
   document.body.appendChild(container);
 }
 
+
+function initSlideFromPath() {
+  if (currentLecture) {
+    document.getElementById(currentLecture).classList.remove('open');
+
+    document.getElementById(currentLecture).nextSibling.classList.remove('slides-open');
+    
+    unloadCurrentSlide();
+    selectInSlideList(currentSlideItem, false);
+  }
+
+  const slideName = window.location.pathname.replace('/', '');
+
+  const result = Object.entries(slides).find(([lecture, slideNames]) => {
+    return Object.keys(slideNames).includes(slideName);
+  });
+
+  if (result) {
+    const [lecture,] = result;
+
+    currentLecture = lecture;
+    currentSlides = slides[currentLecture];
+    currentSlideName = slideName;
+    currentIndex = Object.keys(currentSlides).indexOf(currentSlideName);
+
+    document.getElementById(currentLecture).classList.add('open');
+
+    loadSlide(currentSlideName);
+    currentSlideItem = document.getElementById(Object.keys(currentSlides)[currentIndex]);
+    selectInSlideList(currentSlideItem);
+
+    document.getElementById(currentLecture).nextSibling.classList.add('slides-open');
+  }
+}
+
 window.onload = () => {
+  // navigation
+  window.addEventListener('popstate', function() {
+    initSlideFromPath();
+  });
+
+  // create app
   const scrollingContainer = document.createElement('div');
   scrollingContainer.classList.add('scrolling');
   document.getElementsByClassName('main-view').item(0).appendChild(scrollingContainer);
@@ -681,4 +726,8 @@ window.onload = () => {
       }
     },
   });
+
+  if (window.location.pathname) {
+    initSlideFromPath();
+  }
 }
