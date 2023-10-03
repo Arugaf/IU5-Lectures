@@ -369,6 +369,9 @@ let oldPath = document.location.href;
 let loadSlide = (slideName) => {
   const newSlide = document.createElement('div');
   newSlide.innerHTML = currentSlides[slideName];
+  const svgElement = newSlide.childNodes[0];
+  svgElement.classList.add('svg-adaptable');
+  console.log(svgElement);
   document.getElementsByClassName('scrolling').item(0).appendChild(newSlide.childNodes[0]);
 
   currentSlideName = slideName;
