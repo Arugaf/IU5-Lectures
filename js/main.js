@@ -663,6 +663,12 @@ function createDropdown() {
   document.body.appendChild(container);
 }
 
+function isRootPathname() {
+  const GITHUB_DOMAIN = '/IU5-Lectures/';
+  const LOCAL = '/';
+  return window.location.pathname === LOCAL || window.location.pathname === GITHUB_DOMAIN;
+}
+
 
 function initSlideFromPath() {
   if (currentLecture) {
@@ -772,7 +778,7 @@ window.onload = () => {
   });
 
   if (
-    (window.location.pathname && window.location.pathname !== '/')
+    (window.location.pathname && !isRootPathname())
     || (window.location.search || '').includes('p=')
   ) {
     initSlideFromPath();
