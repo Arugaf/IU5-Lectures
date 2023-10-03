@@ -15,6 +15,7 @@ html {
   color: #222;
   font-size: 1em;
   line-height: 1.4;
+  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
 }
 
 /*
@@ -295,7 +296,6 @@ textarea {
   margin-left: 10px;
   padding-top: 10px;
   padding-bottom: 10px;
-  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
   display: flex;
 }
 
@@ -307,7 +307,6 @@ textarea {
 .slide-element-title {
   font-size: 16pt;
   font-weight: 600;
-  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
   padding: 8px;
 }
 
@@ -358,7 +357,6 @@ textarea {
   bottom: 20px;
   right: 20px;
   position: absolute;
-  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
   font-size: 20pt;
   color: #cccccc;
 }
@@ -378,7 +376,6 @@ textarea {
 }
 
 .search {
-  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
   font-size: 12pt;
   width: 100%;
   border: 1px solid rgb(95, 95, 95, 0.3);
@@ -418,7 +415,6 @@ textarea {
 .tag {
   opacity: 0.5;
   padding: 2px 10px;
-  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
   font-size: 10pt;
   background-color: rgb(95, 95, 95, 0.1);
   border-radius: 8px;
@@ -438,7 +434,6 @@ textarea {
   box-shadow: 4px 4px 17px 0px rgba(34, 60, 80, 0.05);
   display: block;
   overflow: scroll;
-  font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
   font-size: 12pt;
 }
 
@@ -469,4 +464,15 @@ textarea {
 
 .dropdown.close {
   display: none;
+}
+
+.empty-container {
+  display: flex;
+  align-items: center;
+  margin: auto;
+  width: 140px;
+}
+
+.cat {
+  margin: auto;
 }

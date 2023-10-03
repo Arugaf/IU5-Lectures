@@ -371,7 +371,6 @@ let loadSlide = (slideName) => {
   newSlide.innerHTML = currentSlides[slideName];
   const svgElement = newSlide.childNodes[0];
   svgElement.classList.add('svg-adaptable');
-  console.log(svgElement);
   document.getElementsByClassName('scrolling').item(0).appendChild(newSlide.childNodes[0]);
 
   currentSlideName = slideName;
@@ -676,7 +675,20 @@ function initSlideFromPath() {
     selectInSlideList(currentSlideItem, false);
   }
 
-  const slideName = window.location.pathname.replace('/', '');
+  const query = decodeURI(window.location.search)
+    .replace('?', '')
+    .split('&')
+    .map(param => param.split('='))
+    .reduce((values, [ key, value ]) => {
+      values[ key ] = value
+      return values
+    }, {});
+
+  const slideName = (query['p'] || window.location.pathname).replace('/', '');
+
+  if (query['p']) {
+    history.replaceState(null, null, slideName);
+  }
 
   const result = Object.entries(slides).find(([lecture, slideNames]) => {
     return Object.keys(slideNames).includes(slideName);
@@ -698,6 +710,19 @@ function initSlideFromPath() {
 
     document.getElementById(currentLecture).nextSibling.classList.add('slides-open');
   }
+}
+
+function createEmptyScreen() {
+  const container = document.createElement('div');
+  container.classList.add('empty-container');
+
+  const cat = document.createElement('div');
+  cat.innerText = '≽^•⩊•^≼';
+  cat.classList.add('cat');
+
+  container.appendChild(cat);
+
+  return container;
 }
 
 window.onload = () => {
@@ -747,7 +772,12 @@ window.onload = () => {
     },
   });
 
-  if (window.location.pathname) {
+  if (
+    (window.location.pathname && window.location.pathname !== '/')
+    || (window.location.search || '').includes('p=')
+  ) {
     initSlideFromPath();
+  } else {
+    document.getElementsByClassName('scrolling').item(0).appendChild(createEmptyScreen());
   }
 }
