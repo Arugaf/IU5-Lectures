@@ -18,6 +18,14 @@ html {
   font-family: 'Comfortaa', 'Ubuntu Mono', sans-serif;
 }
 
+a {
+  color: #00c984;
+}
+
+a:visited {
+  color: #387568;
+}
+
 /*
  * Remove text-shadow in selection highlight:
  * https://twitter.com/miketaylr/status/12228805301
