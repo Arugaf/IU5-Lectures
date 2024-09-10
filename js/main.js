@@ -84,7 +84,7 @@ const LECTURE_TAGS = {
 
 import { slides as legacySlides } from './legacy.js';
 
-import kitty from '../img/kitty.png';
+// import kitty from '../img/kitty.png';
 
 /**
  * SWIPES
@@ -756,11 +756,11 @@ function createEmptyScreen() {
     const container = document.createElement('div');
     container.classList.add('empty-container');
 
-    const cat = document.createElement('img');
-    cat.src = kitty;
-    cat.classList.add('cat');
+    // const cat = document.createElement('img');
+    // cat.src = kitty;
+    // cat.classList.add('cat');
 
-    container.appendChild(cat);
+    // container.appendChild(cat);
 
     return container;
 }
