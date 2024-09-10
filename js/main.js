@@ -82,6 +82,9 @@ const LECTURE_TAGS = {
     'Lecture 10': {},
 }
 
+const GITHUB_DOMAIN = '/IU5-Lectures/';
+const LOCAL = '/';
+
 import { slides as legacySlides } from './legacy.js';
 
 // import kitty from '../img/kitty.png';
@@ -556,10 +559,10 @@ const createSlideTitle = (title, show = true) => {
         const isLegacy = !slides[currentLecture];
 
         if (isLegacy) {
-            history.pushState(null, null, `/legacy/${currentSlideName}`);
+            history.pushState(null, null, `/${GITHUB_DOMAIN}/legacy/${currentSlideName}`);
             return;
         }
-        history.pushState(null, null, `/${currentSlideName}`);
+        history.pushState(null, null, `/${GITHUB_DOMAIN}/${currentSlideName}`);
     });
 
     return container;
@@ -593,10 +596,10 @@ let createSlideItem = (slideName, legacy = false) => {
         loadSlide(currentSlideItem.id);
 
         if (legacy) {
-            history.pushState(null, null, `/legacy/${currentSlideItem.id}`);
+            history.pushState(null, null, `/${GITHUB_DOMAIN}/legacy/${currentSlideItem.id}`);
             return;
         }
-        history.pushState(null, null, `/${currentSlideItem.id}`);
+        history.pushState(null, null, `/${GITHUB_DOMAIN}/${currentSlideItem.id}`);
     });
 
     return slideContainer;
@@ -669,8 +672,6 @@ function createDropdown() {
 }
 
 function isRootPathname() {
-    const GITHUB_DOMAIN = '/IU5-Lectures/';
-    const LOCAL = '/';
     return window.location.pathname === LOCAL || window.location.pathname === GITHUB_DOMAIN;
 }
 
@@ -701,7 +702,7 @@ function initSlideFromPath() {
     }
 
     const [legacyPrefix, legacySlideName] = slideName.split('/');
-    if (legacyPrefix === 'legacy') {
+    if (legacyPrefix.includes('legacy')) {
         const result = Object.entries(legacySlides).find(([lecture, slideNames]) => {
             return Object.keys(slideNames).includes(legacySlideName);
         })
