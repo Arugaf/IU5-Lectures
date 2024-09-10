@@ -559,10 +559,10 @@ const createSlideTitle = (title, show = true) => {
         const isLegacy = !slides[currentLecture];
 
         if (isLegacy) {
-            history.pushState(null, null, `/${GITHUB_DOMAIN}/legacy/${currentSlideName}`);
+            history.pushState(null, null, `${GITHUB_DOMAIN}legacy/${currentSlideName}`);
             return;
         }
-        history.pushState(null, null, `/${GITHUB_DOMAIN}/${currentSlideName}`);
+        history.pushState(null, null, `${GITHUB_DOMAIN}${currentSlideName}`);
     });
 
     return container;
@@ -596,10 +596,10 @@ let createSlideItem = (slideName, legacy = false) => {
         loadSlide(currentSlideItem.id);
 
         if (legacy) {
-            history.pushState(null, null, `/${GITHUB_DOMAIN}/legacy/${currentSlideItem.id}`);
+            history.pushState(null, null, `${GITHUB_DOMAIN}legacy/${currentSlideItem.id}`);
             return;
         }
-        history.pushState(null, null, `/${GITHUB_DOMAIN}/${currentSlideItem.id}`);
+        history.pushState(null, null, `${GITHUB_DOMAIN}${currentSlideItem.id}`);
     });
 
     return slideContainer;
