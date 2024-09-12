@@ -58,4 +58,17 @@
         width: 100%;
         max-height: none;
     }
+
+    .cat {
+        display: none;
+    }
+
+    .computer-control {
+        display: none;
+    }
+
+    .mobile-control {
+        display: flex;
+        text-align: center;
+    }
 }

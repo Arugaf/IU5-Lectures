@@ -482,15 +482,24 @@ textarea {
   display: flex;
   align-items: center;
   margin: auto;
-  width: 140px;
+  width: calc(100% - 20px);
+  height: 100vh;
   position: relative;
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+  transform: translateX(50%);
+  left: calc(-50% + 20px);
+}
+
+.empty-container::-webkit-scrollbar {
+  display: none;
 }
 
 .cat {
   margin: auto;
   width: 150px;
   position: absolute;
-  left: 0;
+  left: -20px;
   bottom: 0;
 }
 
@@ -500,4 +509,28 @@ textarea {
 
 .legacy-button {
   border-top: 1px solid rgb(95, 95, 95, 0.3);
+}
+
+.control-table {
+  display: flex;
+  width: 100%;
+  height: 40%;
+  justify-content: center;
+}
+
+.control {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  padding: 42px 16px 42px 32px;
+}
+
+.control-icon {
+  display: block;
+  width: 50px;
+  height: 50px;
+}
+
+.mobile-control {
+  display: none;
 }

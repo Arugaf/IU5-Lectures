@@ -362,7 +362,7 @@ let oldPath = document.location.href;
 
 let loadSlide = (slideName) => {
     const newSlide = document.createElement('div');
-    newSlide.innerHTML = currentSlides[slideName];
+    newSlide.innerHTML = currentSlides[slideName.replace('legacy-', '')];
     const svgElement = newSlide.childNodes[0];
     svgElement.classList.add('svg-adaptable');
     document.getElementsByClassName('scrolling').item(0).appendChild(newSlide.childNodes[0]);
@@ -515,13 +515,14 @@ let createSlideElements = () => {
     });
 }
 
-const createSlideTitle = (title, show = true) => {
+const createSlideTitle = (title, actual = true) => {
     const container = document.createElement('div');
     container.classList.add('slide-container', 'clickable');
-    if (!show) {
+    if (!actual) {
         container.classList.add('hide', 'padding');
     }
-    container.id = title;
+    const id = !actual ? `legacy-${title}` : title;
+    container.id = id;
 
     const textContainer = document.createElement('div');
     textContainer.classList.add('slide-element-text', 'slide-element-title');
@@ -536,22 +537,25 @@ const createSlideTitle = (title, show = true) => {
             console.error('Cannot find container to toggle');
         }
 
-        document.getElementById(currentLecture).classList.remove('open');
+        const currentLectureElement = document.getElementById(!actual ? `legacy-${currentLecture.replace('legacy-', '')}` : currentLecture);
 
-        document.getElementById(currentLecture).nextSibling.classList.remove('slides-open');
+        currentLectureElement?.classList.remove('open');
+
+        currentLectureElement?.nextSibling.classList.remove('slides-open');
 
         unloadCurrentSlide();
         selectInSlideList(currentSlideItem, false);
 
-        currentLecture = title;
-        currentSlides = slides[currentLecture] ?? legacySlides[currentLecture];
+        currentLecture = !actual ? `legacy-${title}` : title;
+        currentSlides = slides[currentLecture] ?? legacySlides[currentLecture.replace('legacy-', '')];
         currentSlideName = Object.keys(currentSlides)[0];
         currentIndex = 0;
 
         document.getElementById(currentLecture).classList.add('open');
 
         loadSlide(currentSlideName);
-        currentSlideItem = document.getElementById(Object.keys(currentSlides)[currentIndex]);
+        const firstSlide = Object.keys(currentSlides)[currentIndex];
+        currentSlideItem = document.getElementById(!actual ? `legacy-${firstSlide}` : firstSlide);
         selectInSlideList(currentSlideItem);
 
         target.classList.add('slides-open');
@@ -571,7 +575,7 @@ const createSlideTitle = (title, show = true) => {
 let createSlideItem = (slideName, legacy = false) => {
     const slideContainer = document.createElement('div');
     slideContainer.classList.add('slide-container');
-    slideContainer.id = slideName;
+    slideContainer.id = legacy ? `legacy-${slideName}` : slideName;
 
     const slideElement = document.createElement('div');
     slideElement.classList.add('slide-element');
@@ -591,12 +595,12 @@ let createSlideItem = (slideName, legacy = false) => {
         currentSlideItem = event.currentTarget;
         selectInSlideList(currentSlideItem);
 
-        currentIndex = Object.keys(currentSlides).indexOf(event.currentTarget.id);
+        currentIndex = Object.keys(currentSlides).indexOf(event.currentTarget.id.replace('legacy-', ''));
 
         loadSlide(currentSlideItem.id);
 
         if (legacy) {
-            history.pushState(null, null, `${GITHUB_DOMAIN}legacy/${currentSlideItem.id}`);
+            history.pushState(null, null, `${GITHUB_DOMAIN}legacy/${currentSlideItem.id.replace('legacy-', '')}`);
             return;
         }
         history.pushState(null, null, `${GITHUB_DOMAIN}${currentSlideItem.id}`);
@@ -630,7 +634,9 @@ function updateSlide(index) {
 
     loadSlide(newSlideName);
 
-    currentSlideItem = document.getElementById(newSlideName);
+    const isLegacy = currentSlideItem.id.includes('legacy-');
+    const newSlideKey = isLegacy ? `legacy-${newSlideName}` : newSlideName;
+    currentSlideItem = document.getElementById(newSlideKey);
     selectInSlideList(currentSlideItem);
     currentSlideItem.scrollIntoView(false);
 
@@ -701,7 +707,7 @@ function initSlideFromPath() {
         history.replaceState(null, null, slideName);
     }
 
-    const [legacyPrefix, legacySlideName] = slideName.split('/');
+    const [, legacyPrefix, legacySlideName] = slideName.split('/');
     if (legacyPrefix.includes('legacy')) {
         const result = Object.entries(legacySlides).find(([lecture, slideNames]) => {
             return Object.keys(slideNames).includes(legacySlideName);
@@ -716,16 +722,17 @@ function initSlideFromPath() {
             currentIndex = Object.keys(currentSlides).indexOf(currentSlideName);
 
             Object.entries(legacySlides).forEach(([lecture, slides]) => {
-                document.getElementById(lecture).classList.remove('hide');
+                document.getElementById(`legacy-${lecture}`).classList.remove('hide');
             });
 
-            document.getElementById(currentLecture).classList.add('open');
+            document.getElementById(`legacy-${currentLecture}`).classList.add('open');
 
             loadSlide(currentSlideName);
-            currentSlideItem = document.getElementById(Object.keys(currentSlides)[currentIndex]);
+            const currentSlideItemKey = `legacy-${Object.keys(currentSlides)[currentIndex]}`
+            currentSlideItem = document.getElementById(currentSlideItemKey);
             selectInSlideList(currentSlideItem);
 
-            document.getElementById(currentLecture).nextSibling.classList.add('slides-open');
+            document.getElementById(`legacy-${currentLecture}`).nextSibling.classList.add('slides-open');
 
             return;
         }
@@ -757,11 +764,55 @@ function createEmptyScreen() {
     const container = document.createElement('div');
     container.classList.add('empty-container');
 
-    // const cat = document.createElement('img');
-    // cat.src = kitty;
-    // cat.classList.add('cat');
+    const cat = document.createElement('img');
+    cat.src = `${GITHUB_DOMAIN}kitty.png`;
+    cat.classList.add('cat');
 
-    // container.appendChild(cat);
+    container.appendChild(cat);
+
+    const table = document.createElement('div');
+    table.classList.add('control-table');
+
+    const mobileControl = document.createElement('div');
+    mobileControl.classList.add('control', 'mobile-control');
+
+    const img1 = document.createElement('img');
+    img1.src = `${GITHUB_DOMAIN}mobile.png`;
+    img1.classList.add('control-icon');
+    mobileControl.appendChild(img1);
+
+    const p1 = document.createElement('p');
+    p1.textContent = 'Открыть меню - тап на >'
+    mobileControl.appendChild(p1);
+
+    const p2 = document.createElement('p');
+    p2.textContent = 'Следующий слайд - свайп вправо'
+    mobileControl.appendChild(p2);
+
+    const p3 = document.createElement('p');
+    p3.textContent = 'Предыдущий слайд - свайп влево'
+    mobileControl.appendChild(p3);
+
+    const computerControl = document.createElement('div');
+    computerControl.classList.add('control', 'computer-control');
+
+    const img2 = document.createElement('img');
+    img2.src = `${GITHUB_DOMAIN}computer.png`;
+    img2.classList.add('control-icon');
+    computerControl.appendChild(img2);
+
+    const p4 = document.createElement('p');
+    p4.textContent = 'Следующий слайд - ↓, →'
+    computerControl.appendChild(p4);
+
+    const p5 = document.createElement('p');
+    p5.textContent = 'Предыдущий слайд - ↑, ←'
+    computerControl.appendChild(p5);
+
+    table.appendChild(mobileControl);
+    table.appendChild(computerControl);
+
+    container.appendChild(table);
 
     return container;
 }
@@ -785,8 +836,16 @@ function createLegacyButton() {
             console.error('Cannot find container to toggle');
         }
         Object.entries(legacySlides).forEach(([lecture, slides]) => {
-            document.getElementById(lecture).classList.remove('hide');
+            const element = document.getElementById(`legacy-${lecture}`);
+            if (element.classList.contains('hide')) {
+                element.classList.remove('hide');
+            } else {
+                element.classList.add('hide');
+                element.classList.remove('open');
+                element.nextElementSibling.classList.remove('slides-open');
+            }
         });
+        btn.scrollIntoView(true);
     })
 
     slideList.appendChild(btn);
