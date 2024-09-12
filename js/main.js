@@ -707,7 +707,7 @@ function initSlideFromPath() {
         history.replaceState(null, null, slideName);
     }
 
-    const [, legacyPrefix, legacySlideName] = slideName.split('/');
+    const [legacyPrefix, legacySlideName] = slideName.split('/');
     if (legacyPrefix.includes('legacy')) {
         const result = Object.entries(legacySlides).find(([lecture, slideNames]) => {
             return Object.keys(slideNames).includes(legacySlideName);
@@ -765,7 +765,7 @@ function createEmptyScreen() {
     container.classList.add('empty-container');
 
     const cat = document.createElement('img');
-    cat.src = `${GITHUB_DOMAIN}kitty.png`;
+    cat.src = `${GITHUB_DOMAIN}static/kitty.png`;
     cat.classList.add('cat');
 
     container.appendChild(cat);
@@ -777,7 +777,7 @@ function createEmptyScreen() {
     mobileControl.classList.add('control', 'mobile-control');
 
     const img1 = document.createElement('img');
-    img1.src = `${GITHUB_DOMAIN}mobile.png`;
+    img1.src = `${GITHUB_DOMAIN}static/mobile.png`;
     img1.classList.add('control-icon');
     mobileControl.appendChild(img1);
 
@@ -797,7 +797,7 @@ function createEmptyScreen() {
     computerControl.classList.add('control', 'computer-control');
 
     const img2 = document.createElement('img');
-    img2.src = `${GITHUB_DOMAIN}computer.png`;
+    img2.src = `${GITHUB_DOMAIN}static/computer.png`;
     img2.classList.add('control-icon');
     computerControl.appendChild(img2);
 
